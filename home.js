@@ -89,4 +89,4 @@ if (escolha === 'f') {
 
 let escolhaFS = entrada.entrada('Qual deseja assistir? ');
 
-// for (let i = 0; i <)
+//for (let i = 0; i <)
