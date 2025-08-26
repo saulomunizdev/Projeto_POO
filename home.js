@@ -91,7 +91,7 @@ let escolhaFS = entrada.entrada('Qual deseja assistir? ');
 
 for (let i = 0; i < escolhaFS; i++) {
     if (escolhaFS == i + 1 && escolha === 'f') {
-        entrada.mensagemCompleta(`Você escolheu o filme: ${filmes[i].compartilhar()}`);
+        entrada.mensagemCompleta(`Você escolheu o muito bem o filme: ${filmes[i].compartilhar()}`);
     } else if (escolhaFS == i + 1 && escolha === 's') {
         entrada.mensagemCompleta(`Você escolheu a série: ${series[i].compartilhar()}`);
     }
