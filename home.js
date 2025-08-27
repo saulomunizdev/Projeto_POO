@@ -6,38 +6,47 @@ import { Serie } from "./serie.js";
 const objEntradaSaida = new FuncoesES();
 const entrada = new FuncoesES();
 
+
+let login = entrada.entrada('Para logar digite (entrar) ou (criar) para criar seu login: ').toLowerCase(); 
+
+
 // FUNÇÃO LOGIN, AQUI ELE VERIFICA SE JA TEM CADASTRADO 
 
-// var usuarios = [new CadUsuario('Roberval', 'robe@hotmail.com', 'senha123'),
-//                 new CadUsuario('joao', 'joao@gmail.com', 'Senha@segura123'),
-//                 new CadUsuario('Douglas', 'dg@hotmail.com', 'Dg@654321'),
-//                 new CadUsuario('Maria', 'maria@uol.com', 'senha123456')
-//             ];
 
 
-// let  dadosLogin = objEntradaSaida.cadastroCompleto(['email', 'senha']);
-// let  usuariologado = usuarios.find(u => u.fazerLogin(dadosLogin[0], dadosLogin[1]));
+var usuarios = [new CadUsuario('Roberval', 'robe@hotmail.com', 'senha123'),
+                new CadUsuario('joao', 'joao@gmail.com', 'Senha@segura123'),
+                new CadUsuario('Douglas', 'dg@hotmail.com', 'Dg@654321'),
+                new CadUsuario('Maria', 'maria@uol.com', 'senha123456'),
+                new CadUsuario('teste', 'teste', '123')
+            ];
 
-// if (usuariologado) { 
-//     entrada.mensagemSimples(`Login efetuado com sucesso! Bem-vindo, ${usuariologado.nome}`);
-// }else {
-//     entrada.mensagemSimples('Email ou senha incorreto');
-    
-// }
+if (login === 'entrar') {
+    let  dadosLogin = objEntradaSaida.cadastroCompleto(['email', 'senha']);
+    let  usuariologado = usuarios.find(u => u.fazerLogin(dadosLogin[0], dadosLogin[1]));
+
+    if (usuariologado) { 
+        entrada.mensagemSimples(`Login efetuado com sucesso! Bem-vindo, ${usuariologado.nome}`);
+    }else {
+        entrada.mensagemSimples('Email ou senha incorreto');
+        
+    }
+} else {
 
 // // FUNÇÃO CADASTRO E LOGANDO APÓS O CADASTRO
 
-// var usuario = []
-// let dados = entrada.cadastroCompleto(['nome', 'email', 'senha']);
-// usuario.push(new CadUsuario(dados[0], dados[1], dados[2]));
+    var usuario = []
+    let dados = entrada.cadastroCompleto(['nome', 'email', 'senha']);
+    usuario.push(new CadUsuario(dados[0], dados[1], dados[2]));
 
-// entrada.mensagemCompleta(`Usuário ${usuario[0].nome} cadastrado com sucesso!`);
+    entrada.mensagemCompleta(`Usuário ${usuario[0].nome} cadastrado com sucesso!`);
 
-// let email = entrada.entrada('Digite o email: ');
-// let senha = entrada.entrada('Digite a senha: ');
-// if (usuario[0].fazerLogin(email, senha)){
-//     entrada.mensagemSimples('Login realizado com sucesso!');
-// }
+    let email = entrada.entrada('Digite o email: ');
+    let senha = entrada.entrada('Digite a senha: ');
+    if (usuario[0].fazerLogin(email, senha)){
+        entrada.mensagemSimples('Login realizado com sucesso!');
+    }
+}
 
 // FUNÇÃO LISTA DE FILMES E SERIES
 var filmes = [  new Filme('O senhor dos aneis', 180, 'Aventura de um hobbit', 2001),
@@ -87,12 +96,31 @@ if (escolha === 'f') {
     }
 }
 
+// QUAL DESEJA ASSISTIR
+
 let escolhaFS = entrada.entrada('Qual deseja assistir? ');
 
 for (let i = 0; i < escolhaFS; i++) {
     if (escolhaFS == i + 1 && escolha === 'f') {
-        entrada.mensagemCompleta(`Você escolheu o filme: ${filmes[i].compartilhar()}`);
+        entrada.mensagemCompleta(`Você escolheu o filme: ${filmes[i].assistir()}`);
     } else if (escolhaFS == i + 1 && escolha === 's') {
-        entrada.mensagemCompleta(`Você escolheu a série: ${series[i].compartilhar()}`);
+        entrada.mensagemCompleta(`Você escolheu a série: ${series[i].assistir()}`);
     }
+}
+
+//DESEJA CONTINUAR OU COMPARTILHAR
+
+let assistirCompartilhar = entrada.entrada('Você quer continuar assistindo ou Compartilhar? (continuar/compartilhar): ').toLocaleLowerCase();
+
+if (assistirCompartilhar === 'compartilhar') {
+    
+    for (let i = 0; i < escolhaFS; i++) {
+        if (escolhaFS == i + 1 && escolha === 'f') {
+            entrada.mensagemCompleta(`${filmes[i].compartilhar()}`);
+        } else if (escolhaFS == i + 1 && escolha === 's') {
+            entrada.mensagemCompleta(`${series[i].compartilhar()}`);
+        }
+    }
+} else {
+    entrada.mensagemSimples(`Pegue sua pipoca e sua bebida e vamos la`)
 }
